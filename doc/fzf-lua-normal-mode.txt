@@ -1,0 +1,151 @@
+*fzf-lua-normal-mode.txt*      For NVIM v0.8.0      Last change: 2025 April 09
+
+==============================================================================
+Table of Contents                      *fzf-lua-normal-mode-table-of-contents*
+
+1. fzf-lua-normal-mode               |fzf-lua-normal-mode-fzf-lua-normal-mode|
+  - ⚡️ Requirements|fzf-lua-normal-mode-fzf-lua-normal-mode-⚡️-requirements|
+  - ✨ Features        |fzf-lua-normal-mode-fzf-lua-normal-mode-✨-features|
+  - 📦 Installation|fzf-lua-normal-mode-fzf-lua-normal-mode-📦-installation|
+  - 🚀 How it works|fzf-lua-normal-mode-fzf-lua-normal-mode-🚀-how-it-works|
+  - ⚙️ Configuration|fzf-lua-normal-mode-fzf-lua-normal-mode-⚙️-configuration|
+  - 📜 License        |fzf-lua-normal-mode-fzf-lua-normal-mode-📜-license|
+
+==============================================================================
+1. fzf-lua-normal-mode               *fzf-lua-normal-mode-fzf-lua-normal-mode*
+
+This plugin allows you to define custom normal mode keybindings that interact
+with `fzf-lua` prompts in a clean and intuitive way—without needing to drop
+into insert mode or write complicated mappings.
+
+
+⚡️ REQUIREMENTS*fzf-lua-normal-mode-fzf-lua-normal-mode-⚡️-requirements*
+
+- Neovim >= **0.10.0**
+- `fzf-lua` <https://github.com/ibhagwan/fzf-lua>
+
+
+✨ FEATURES            *fzf-lua-normal-mode-fzf-lua-normal-mode-✨-features*
+
+- Use familiar normal mode keys inside `fzf-lua` windows
+- Supports:
+    - **Repeatable keys** (e.g., `j`, `k`, `<C-d>`) for navigation
+    - **Exit keys** (e.g., `q`, `<CR>`) to close or confirm
+    - Keys that **wait for additional user input** (e.g., jumps in `fzf-lua`)
+
+
+📦 INSTALLATION  *fzf-lua-normal-mode-fzf-lua-normal-mode-📦-installation*
+
+Install the plugin with your preferred package manager.
+
+
+LAZY.NVIM ~
+
+>lua
+    {
+      "ibhagwan/fzf-lua",
+      dependencies = { "drop-stones/fzf-lua-normal-mode" },
+    },
+    {
+      "drop-stones/fzf-lua-normal-mode",
+      opts = {
+        -- see configuration section
+      }
+    }
+<
+
+
+🚀 HOW IT WORKS  *fzf-lua-normal-mode-fzf-lua-normal-mode-🚀-how-it-works*
+
+When a `fzf-lua` prompt opens:
+
+- Your configured normal mode keybindings are bound **buffer-locally**
+- Keys act depending on their type:
+
+  ---------------------------------------------------------------------------------
+  Key Type                 Behavior
+  ------------------------ --------------------------------------------------------
+  repeatable = true        Enters insert mode, sends action, exits back to normal
+  (default)                mode after a delay
+
+  repeatable = false       Sends insert-mode action and stays in normal mode
+
+  wait_user_input = true   Sends action, waits for one more user key, then exits
+                           insert mode
+  ---------------------------------------------------------------------------------
+
+  [!WARNING]
+  - If `action` is a function, both `repeatable` and `wait_user_input` are ignored. You take full control.
+  - If both `repeatable` and `wait_user_input` are `true`, `repeatable` is ignored.
+
+⚙️ CONFIGURATION*fzf-lua-normal-mode-fzf-lua-normal-mode-⚙️-configuration*
+
+You can configure the plugin via the following options.
+
+
+  [!important] 🩺 Run `:checkhealth fzf-lua-normal-mode` if you run into any
+  issues.
+
+🔑 KEYS ~
+
+An array of keybind definitions. Each item is a table with:
+
+  ------------------------------------------------------------------------
+  Field             Type           Description
+  ----------------- -------------- ---------------------------------------
+  key               string         Normal mode key to bind (e.g., j, q, s)
+
+  action            string or      What to execute; string is treated as
+                    function       insert-mode input
+
+  repeatable        boolean        Default: true. Enables repeatable
+                    (optional)     behavior like movement keys
+
+  wait_user_input   boolean        Default: false. Waits for one more
+                    (optional)     character after executing action
+  ------------------------------------------------------------------------
+
+⏱ DEFER_MS ~
+
+The number of milliseconds to wait before returning to normal mode after a key
+is pressed. Default is `20`.
+
+
+  [!NOTE]
+  Setting a lower value will makes the response feel faster, but may cause timing
+  issues. Tune this based on your environment for the best balance of
+  responsiveness and stability.
+
+EXAMPLE ~
+
+>lua
+    {
+      keys = {
+        -- repeatable keys
+        { key = "j", action = "<Down>" },
+        { key = "k", action = "<Up>" },
+        { key = "gg", action = "<A-g>" },
+        { key = "G", action = "<A-G>" },
+        { key = "<C-u>", action = "<C-u>" },
+        { key = "<C-d>", action = "<C-d>" },
+        -- additional user input keys
+        { key = "s", action = "<your-jumps-keybind>", wait_user_input = true },
+        -- exit keys
+        { key = "q", action = "<Esc>", repeatable = false },
+        { key = "<Enter>", action = "<CR>", repeatable = false },
+        -- custom function keys
+        { key = "z", action = function() vim.cmd("echo 'custom action'") end },
+      }
+      defer_ms = 20,
+    }
+<
+
+
+📜 LICENSE            *fzf-lua-normal-mode-fzf-lua-normal-mode-📜-license*
+
+This project is licensed under the MIT License - see the LICENSE <LICENSE> file
+for details.
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:
