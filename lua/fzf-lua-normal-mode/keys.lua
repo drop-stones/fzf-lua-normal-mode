@@ -1,0 +1,5 @@
+---@class FzfLuaNormalModeKey
+---@field key string
+---@field action string|fun()
+---@field repeatable? boolean
+---@field wait_user_input? boolean
