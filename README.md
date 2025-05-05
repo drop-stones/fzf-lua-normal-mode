@@ -57,9 +57,6 @@ When a `fzf-lua` prompt opens:
 
 You can configure the plugin via the following options.
 
-> [!important]
-> 🩺 Run `:checkhealth fzf-lua-normal-mode` if you run into any issues.
-
 ### 🔑 `keys`
 
 An array of keybind definitions. Each item is a table with:
@@ -93,6 +90,10 @@ An array of keybind definitions. Each item is a table with:
   }
 }
 ```
+
+## 🩺 Troubleshooting
+
+Run `:checkhealth fzf-lua-normal-mode` if you run into any issues.
 
 ## 📜 License
 
