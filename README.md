@@ -57,9 +57,6 @@ When a `fzf-lua` prompt opens:
 
 You can configure the plugin via the following options.
 
-> [!important]
-> 🩺 Run `:checkhealth fzf-lua-normal-mode` if you run into any issues.
-
 ### 🔑 `keys`
 
 An array of keybind definitions. Each item is a table with:
@@ -70,17 +67,6 @@ An array of keybind definitions. Each item is a table with:
 | `action` | `string` or `function` | What to execute; string is treated as insert-mode input |
 | `repeatable` | `boolean` (optional) | Default: `true`. Enables repeatable behavior like movement keys |
 | `wait_user_input` | `boolean` (optional) | Default: `false`. Waits for one more character after executing `action` |
-
-### ⏱ `defer_ms`
-
-The number of milliseconds to wait before returning to normal mode after a key is pressed.<br />
-Default is `20`.
-
-> [!NOTE]
->
-> Setting a lower value will makes the response feel faster, but may cause timing issues.
-> Tune this based on your environment for the best balance of responsiveness and stability.
->
 
 ### Example
 
@@ -102,9 +88,12 @@ Default is `20`.
     -- custom function keys
     { key = "z", action = function() vim.cmd("echo 'custom action'") end },
   }
-  defer_ms = 20,
 }
 ```
+
+## 🩺 Troubleshooting
+
+Run `:checkhealth fzf-lua-normal-mode` if you run into any issues.
 
 ## 📜 License
 

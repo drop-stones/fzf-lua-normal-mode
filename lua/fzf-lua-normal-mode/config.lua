@@ -1,6 +1,5 @@
 ---@class FzfLuaNormalModeOptions
 ---@field keys FzfLuaNormalModeKey[]
----@field defer_ms integer
 
 local M = {}
 
@@ -14,9 +13,6 @@ local default_key = {
 
 ---@type FzfLuaNormalModeKey[]
 M.keys = {}
-
----@type integer
-M.defer_ms = 20
 
 ---Merge user keymap options with defaults and return configuration.
 ---@param user_options FzfLuaNormalModeOptions
@@ -32,9 +28,7 @@ function M.setup(user_options)
     return _keybind
   end, user_options.keys or {})
 
-  M.defer_ms = user_options.defer_ms or M.defer_ms
-
-  return M.keys, M.defer_ms
+  return M.keys
 end
 
 return M
