@@ -1,5 +1,8 @@
 local bindings = require("fzf-lua-normal-mode.bindings")
 
+---@type integer
+local interval_ms = 20
+
 ---@class FzfLuaNormalModeKey
 ---@field key string
 ---@field action string|fun()
@@ -10,8 +13,7 @@ local M = {}
 
 ---Register keymaps for fzf-lua buffer based on key type.
 ---@param keys FzfLuaNormalModeKey[]
----@param defer_ms integer
-function M.setup_keymap(keys, defer_ms)
+function M.setup_keymap(keys)
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fzf",
     callback = function()
@@ -19,9 +21,9 @@ function M.setup_keymap(keys, defer_ms)
         if type(keybind.action) == "function" then
           vim.keymap.set("n", keybind.key, keybind.action, { buffer = true })
         elseif keybind.wait_user_input == true then
-          bindings.wait_user_input(keybind.key, keybind.action --[[@as string]], defer_ms)
+          bindings.wait_user_input(keybind.key, keybind.action --[[@as string]], interval_ms)
         elseif keybind.repeatable == true then
-          bindings.repeatable(keybind.key, keybind.action --[[@as string]], defer_ms)
+          bindings.repeatable(keybind.key, keybind.action --[[@as string]], interval_ms)
         else
           bindings.insert_once(keybind.key, keybind.action --[[@as string]])
         end

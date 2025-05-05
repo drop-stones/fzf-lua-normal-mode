@@ -71,17 +71,6 @@ An array of keybind definitions. Each item is a table with:
 | `repeatable` | `boolean` (optional) | Default: `true`. Enables repeatable behavior like movement keys |
 | `wait_user_input` | `boolean` (optional) | Default: `false`. Waits for one more character after executing `action` |
 
-### ⏱ `defer_ms`
-
-The number of milliseconds to wait before returning to normal mode after a key is pressed.<br />
-Default is `20`.
-
-> [!NOTE]
->
-> Setting a lower value will makes the response feel faster, but may cause timing issues.
-> Tune this based on your environment for the best balance of responsiveness and stability.
->
-
 ### Example
 
 ```lua
@@ -102,7 +91,6 @@ Default is `20`.
     -- custom function keys
     { key = "z", action = function() vim.cmd("echo 'custom action'") end },
   }
-  defer_ms = 20,
 }
 ```
 

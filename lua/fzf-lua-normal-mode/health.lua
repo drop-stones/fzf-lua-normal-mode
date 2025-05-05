@@ -72,13 +72,6 @@ local function check_options()
   if warn_action_type then
     vim.health.warn("`action` must be a string or a function.")
   end
-
-  -- Warn about out-of-range defer_ms values
-  if 10 <= config.defer_ms and config.defer_ms <= 50 then
-    vim.health.ok("`defer_ms` is " .. config.defer_ms .. ".")
-  else
-    vim.health.warn("`defer_ms` is " .. config.defer_ms .. ". Consider a value between 10 and 50 for stability.")
-  end
 end
 
 return {
