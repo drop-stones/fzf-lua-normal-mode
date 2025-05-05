@@ -1,4 +1,4 @@
-*fzf-lua-normal-mode.txt*      For NVIM v0.8.0      Last change: 2025 April 09
+*fzf-lua-normal-mode.txt*       For NVIM v0.8.0       Last change: 2025 May 05
 
 ==============================================================================
 Table of Contents                      *fzf-lua-normal-mode-table-of-contents*
@@ -9,6 +9,7 @@ Table of Contents                      *fzf-lua-normal-mode-table-of-contents*
   - 📦 Installation|fzf-lua-normal-mode-fzf-lua-normal-mode-📦-installation|
   - 🚀 How it works|fzf-lua-normal-mode-fzf-lua-normal-mode-🚀-how-it-works|
   - ⚙️ Configuration|fzf-lua-normal-mode-fzf-lua-normal-mode-⚙️-configuration|
+  - 🩺 Troubleshooting|fzf-lua-normal-mode-fzf-lua-normal-mode-🩺-troubleshooting|
   - 📜 License        |fzf-lua-normal-mode-fzf-lua-normal-mode-📜-license|
 
 ==============================================================================
@@ -83,9 +84,6 @@ When a `fzf-lua` prompt opens:
 You can configure the plugin via the following options.
 
 
-  [!important] 🩺 Run `:checkhealth fzf-lua-normal-mode` if you run into any
-  issues.
-
 🔑 KEYS ~
 
 An array of keybind definitions. Each item is a table with:
@@ -104,17 +102,6 @@ An array of keybind definitions. Each item is a table with:
   wait_user_input   boolean        Default: false. Waits for one more
                     (optional)     character after executing action
   ------------------------------------------------------------------------
-
-⏱ DEFER_MS ~
-
-The number of milliseconds to wait before returning to normal mode after a key
-is pressed. Default is `20`.
-
-
-  [!NOTE]
-  Setting a lower value will makes the response feel faster, but may cause timing
-  issues. Tune this based on your environment for the best balance of
-  responsiveness and stability.
 
 EXAMPLE ~
 
@@ -136,9 +123,13 @@ EXAMPLE ~
         -- custom function keys
         { key = "z", action = function() vim.cmd("echo 'custom action'") end },
       }
-      defer_ms = 20,
     }
 <
+
+
+🩺 TROUBLESHOOTING*fzf-lua-normal-mode-fzf-lua-normal-mode-🩺-troubleshooting*
+
+Run `:checkhealth fzf-lua-normal-mode` if you run into any issues.
 
 
 📜 LICENSE            *fzf-lua-normal-mode-fzf-lua-normal-mode-📜-license*
